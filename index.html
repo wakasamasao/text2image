@@ -34,7 +34,7 @@
 
         #inputArea textarea,
         #inputArea input {
-            width: 10em;
+            width: 32%;
             margin: 2px;
             font-size: 1em;
         }
@@ -57,37 +57,53 @@
             font-weight: bold;
             font-size: 2em;
         }
+
+        @media (min-width: 600px) {
+            .container {
+                display: flex;
+            }
+
+            #settingZone {
+                width: 400px;
+            }
+
+            #imageZone {
+                min-width: 200px;
+                flex: 1;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <h2>テキストから画像</h2>
 
-    <div>
-        <h2>テキストから画像</h2>
+    <div class="container">
 
-        <div id="controlArea">
-            <h3>画像生成</h3>
-            <div id="selectArea" class="btn-group" role="group">
+        <div id="settingZone">
+            <div id="controlArea">
+                <h3>画像生成</h3>
+                <div id="selectArea" class="btn-group" role="group">
+                </div>
+                <div id="inputArea" class="row"></div>
             </div>
-            <div id="inputArea" class="row"></div>
+
+            <div id="settingArea">
+                <h3>設定</h3>
+                <textarea id="settingText"></textarea>
+                <button id="clearLocalData">初期状態に戻す</button>
+            </div>
         </div>
-
-        <div id="settingArea">
-            <h3>設定</h3>
-            <textarea id="settingText"></textarea>
-            <button id="clearLocalData">初期状態に戻す</button>
-        </div>
-
-        <hr />
-
-        <div id="geneInfo"></div>
-
-        <div id="imagePanel">
-            <a href="#" id="dllink">ダウンロード</a>
-            <button id="dlclick" class="btn btn-success">ダウンロード</button>
-        </div>
-        <div id="imageArea">
-            <canvas id="geneCanvas"></canvas>
+        <div id="imageZone">
+            <h3>生成画像</h3>
+            <div id="geneInfo"></div>
+            <div id="imagePanel">
+                <a href="#" id="dllink">ダウンロード</a>
+                <button id="dlclick" class="btn btn-success">ダウンロード</button>
+            </div>
+            <div id="imageArea">
+                <canvas id="geneCanvas"></canvas>
+            </div>
         </div>
 
     </div>
