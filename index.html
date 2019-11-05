@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>テキストから画像</title>
     <style>
+        h2,
+        h3,
+        h4 {
+            margin: 5px;
+            padding: 5px;
+            border-top: 1px solid gray;
+            border-bottom: 1px solid gray;
+            font-size: 12px;
+        }
+
+        h1 {
+            margin: 5px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
         textarea {
             border: 1px solid gray;
             box-shadow: inset 1px 4px 9px -6px rgba(0, 0, 0, 0.5);
@@ -16,8 +32,7 @@
 
         #controlArea,
         #settingArea,
-        #imagePanel,
-        #imageArea {
+        #imageZone {
             /* border: 1px dotted gray; */
             padding: 10px;
         }
@@ -55,20 +70,21 @@
         #geneInfo {
             color: red;
             font-weight: bold;
-            font-size: 2em;
+            font-size: 1em;
         }
 
-        @media (min-width: 600px) {
+        @media (min-width: 700px) {
             .container {
                 display: flex;
             }
 
             #settingZone {
-                width: 400px;
+                width: 50%;
+                min-width: 450px;
             }
 
             #imageZone {
-                min-width: 200px;
+                min-width: 250px;
                 flex: 1;
             }
         }
@@ -76,7 +92,7 @@
 </head>
 
 <body>
-    <h2>テキストから画像</h2>
+    <h1>テキストから画像</h1>
 
     <div class="container">
 

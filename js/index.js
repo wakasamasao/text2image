@@ -130,7 +130,7 @@ function selectType(num) {
         textDom.onkeyup = updateTextAreaEvet;
 
         if (data.row > 1) {
-            textDom.style.height = (Number(data.row) * 0.9 + 1.5) + "em";
+            textDom.style.height = (Number(data.row) * 1.2 + 2) + "em";
         }
 
         if (tm.setting.order == "vertical") {
