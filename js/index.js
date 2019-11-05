@@ -3,11 +3,11 @@ let selectedNum = 0;
 
 window.onload = function () {    // 外部の設定ファイルがあるかどうか調査
     if (localStorage && localStorage.getItem("setting")) {
-        // try {
-        //     setting = JSON.parse(localStorage.getItem("setting"));
-        // } catch (error) {
-        localStorage.removeItem("setting");
-        // }
+        try {
+            setting = JSON.parse(localStorage.getItem("setting"));
+        } catch (error) {
+            localStorage.removeItem("setting");
+        }
     }
 
     if (typeof (setting) == "undefined") {
@@ -33,7 +33,9 @@ window.onload = function () {    // 外部の設定ファイルがあるかど�
     }
 
     document.getElementById("clearLocalData").onclick = function () {
-        localStorage.removeItem("setting");
+        if (localStorage) {
+            localStorage.removeItem("setting");
+        }
         location.reload();
     }
 }
@@ -89,8 +91,10 @@ function init() {
 }
 
 function saveSetting() {
-    // localStorage.setItem("setting", JSON.stringify(setting));
     document.getElementById("settingText").value = JSON.stringify(setting, undefined, 1);
+    if (localStorage) {
+        localStorage.setItem("setting", JSON.stringify(setting));
+    }
 }
 
 // --------------------
