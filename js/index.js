@@ -1,18 +1,13 @@
 let base64, fileName;
 let selectedNum = 0;
 
-window.onload = function () {    // 外部の設定ファイルがあるかどうか調査
-    if (localStorage && localStorage.getItem("setting")) {
-        try {
-            setting = JSON.parse(localStorage.getItem("setting"));
-        } catch (error) {
-            localStorage.removeItem("setting");
-        }
-    }
+let useLocalData = true;
 
+window.onload = function () {    // 外部の設定ファイルがあるかどうか調査
     if (typeof (setting) == "undefined") {
         alert('setting.jsが読み込めませんでした。ファイルや環境を確認してください。');
     } else {
+        init();
         saveSetting();
         document.getElementById("settingText").onchange = function (e) {
             try {
@@ -29,7 +24,6 @@ window.onload = function () {    // 外部の設定ファイルがあるかど�
         document.getElementById("dlclick").onclick = function () {
             dlStart();
         }
-        init();
     }
 
     document.getElementById("clearLocalData").onclick = function () {
@@ -57,12 +51,30 @@ function init() {
             if (p[0] == "mode") {
                 mode = p[1];
             }
+            if (p[0] == "save") {
+                useLocalData = (p[1] == "true") ? true : false;
+            }
         }
 
         for (let i in setting.templates) {
             if (setting.templates[i].id == id) {
                 key = Number(i);
             }
+        }
+    }
+
+    console.log(useLocalData);
+    if (useLocalData) {
+        if (localStorage && localStorage.getItem("setting")) {
+            try {
+                setting = JSON.parse(localStorage.getItem("setting"));
+            } catch (error) {
+                localStorage.removeItem("setting");
+            }
+        }
+    } else {
+        if (localStorage) {
+            localStorage.removeItem("setting");
         }
     }
 
@@ -92,7 +104,7 @@ function init() {
 
 function saveSetting() {
     document.getElementById("settingText").value = JSON.stringify(setting, undefined, 1);
-    if (localStorage) {
+    if (useLocalData && localStorage) {
         localStorage.setItem("setting", JSON.stringify(setting));
     }
 }
