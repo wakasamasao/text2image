@@ -6,9 +6,9 @@ let setting = {
             "id": "linemenunormal",
             "name": "LINE メニュー",
             "output": {
-                "prefix": "rich_normal_",
+                "prefix": "rich_normal",
                 "exec": "jpg",
-                "quality": 0.7
+                "quality": 0.6
             },
             "setting": {
                 "background": {

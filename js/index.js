@@ -71,6 +71,9 @@ function init() {
             } catch (error) {
                 localStorage.removeItem("setting");
             }
+            if (!setting.templates) {
+                localStorage.removeItem("setting");
+            }
         }
     } else {
         if (localStorage) {
@@ -122,6 +125,7 @@ function selectType(num) {
     let inputArea = document.getElementById("inputArea");
     while (inputArea.firstChild) inputArea.removeChild(inputArea.firstChild);
 
+    console.log(setting.templates);
     let tm = setting.templates[num];
     for (let i in tm.texts) {
         let data = tm.texts[i];
@@ -143,7 +147,7 @@ function selectType(num) {
         }
         textDom.setAttribute("key", i);
         // textDom.onchange = updateTextAreaEvet;
-        textDom.onkeyup = updateTextAreaEvet;
+        textDom.onkeyup = keyEvent;
 
         if (data.row > 1) {
             textDom.style.height = (Number(data.row) * 1.2 + 2) + "em";
@@ -162,7 +166,17 @@ function selectType(num) {
     genePic();
 }
 
+let keytimer;
+function keyEvent() {
+    let _this = this;
+    if (keytimer) clearTimeout(keytimer);
+    keytimer = setTimeout(function () {
+        updateTextAreaEvet.call(_this);
+    }, 300);
+}
+
 function updateTextAreaEvet(e) {
+    console.log("keyevent")
     let key = Number(this.getAttribute("key"));
     let data = setting.templates[selectedNum].texts[key];
 
@@ -270,8 +284,7 @@ function drowPic(ca, ctx, baseData) {
 
         fileName = baseData.output.prefix + "." + baseData.output.exec;
         if (baseData.output.exec == "jpg") {
-            base64 = ca.toDataURL(["image/jpeg", baseData.output.quality]);
-
+            base64 = ca.toDataURL("image/jpeg", baseData.output.quality);
         } else if (baseData.output.exec == "png") {
             base64 = ca.toDataURL();
         } else {
