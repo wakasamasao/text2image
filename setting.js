@@ -147,8 +147,8 @@ let setting = {
                     "font-size": 40,
                     "font-family": "sans-serif",
                     "color": "#000000",
-                    "defaultformat": "YYYY年MM月DD日\nhh時00分 発令",
-                    "value": "2019年11月03日\n15時00分 発令"
+                    "defaultformat": "YYYY年MM月DD日\nhh時00分 発表",
+                    "value": "2019年11月03日\n15時00分 発表"
                 },
                 {
                     "x": 540,
